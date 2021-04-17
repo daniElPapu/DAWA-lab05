@@ -6,14 +6,14 @@ const App = () => {
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newPhone, setNewPhone] = useState('')
-
+  const [ filter, setFilter]=useState('')
   const submit=(e)=>{
     e.preventDefault()
     let person = persons.find(person => person.name === newName);
     if(person !== undefined ){
       alert(`${newName} is already added to phonebook`)
     }
-    else if(newName != '' && newPhone != ''){
+    else if(newName !== '' && newPhone !== ''){
       setPersons([
         ...persons,
         {name: newName,phone:newPhone}
@@ -27,6 +27,10 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+        <form>
+          filter shown with <input value={filter} onChange={(e)=>setFilter(e.target.value)}/>
+        </form>
+      <h2>add a new</h2>
       <form>
         <div>
           name: <input value={newName} onChange={(e)=>setNewName(e.target.value)}/>
@@ -39,7 +43,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person)=>{
+      {persons.filter(person=>person.name.includes(filter)).map((person)=>{
         return (
           <Person key={person.name} name={person.name} phone={person.phone}/>
         )
