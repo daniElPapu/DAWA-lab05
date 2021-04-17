@@ -29,6 +29,7 @@ const Course =({course})=>{
 	<>
 		<Header name={course.name} />
 		<Content parts={course.parts} />
+		<Suma parts={course.parts}/>
 	</>)
 }
 const Header =({name})=>{
@@ -54,4 +55,9 @@ const Part = ({name,exercise})=>{
 		</p>
 	)
 }
+const Suma = ({parts})=>{
+	return(
+	  <p>Number of exercises {parts.reduce((sum, part) => ( sum + part.exercises), 0)}</p>
+	)
+  }
 ReactDOM.render(<App />, document.getElementById('root'))
