@@ -8,10 +8,16 @@ const App = () => {
 
   const submit=(e)=>{
     e.preventDefault()
-    setPersons([
-      ...persons,
-      {name: newName}
-    ])
+    let person = persons.find(person => person.name === newName);
+    if(person !== undefined){
+      alert(`${newName} is already added to phonebook`)
+    }
+    else{
+      setPersons([
+        ...persons,
+        {name: newName}
+      ])
+    }
     setNewName('')
   }
   return (
